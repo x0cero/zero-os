@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [{"Name": "Zero OS"}],
+        "Id": "org.zero.newsprint",
+        "License": "GPL-2.0+",
+        "Name": "Zero Newsprint",
+        "Description": "Black ink on paper, with a strip along the top."
+    },
+    "X-Plasma-APIVersion": "2"
+}

@@ -1,0 +1,22 @@
+[General]
+ColorScheme=ZeroNewsprint
+font=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=Geist Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Geist,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+XftAntialias=true
+XftHintStyle=hintslight
+XftSubPixel=rgb
+
+[Icons]
+Theme=breeze
+
+[KDE]
+LookAndFeelPackage=org.zero.newsprint
+SingleClick=false
+widgetStyle=Breeze
+AnimationDurationFactor=0.7
+
+[WM]
+activeFont=Geist Pixel Square,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1

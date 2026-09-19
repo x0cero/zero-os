@@ -1,0 +1,7 @@
+[Common]
+ShadowSize=ShadowNone
+OutlineIntensity=OutlineOff
+
+[Style]
+MenuOpacity=100
+ToolBarDrawItemSeparator=false
