@@ -12,8 +12,8 @@ cp -avf "/ctx/system_files"/. /
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux
+# Nothing extra yet: the first build is the stock base, so the pipeline is
+# proven before the Zero OS look goes on top.
 
 # Use a COPR Example:
 #
@@ -22,6 +22,3 @@ dnf5 install -y tmux
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 
-#### Example for enabling a System Unit File
-
-systemctl enable podman.socket
