@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "Authors": [{"Name": "Zero OS"}],
+        "Id": "Zero",
+        "License": "CC0",
+        "Name": "Zero"
+    }
+}

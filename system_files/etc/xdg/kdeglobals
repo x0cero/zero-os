@@ -1,22 +1,22 @@
 [General]
-ColorScheme=ZeroNewsprint
-font=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-fixed=Geist Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-menuFont=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-smallestReadableFont=Geist,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-toolBarFont=Geist,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+ColorScheme=WhiteSur
+font=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=JetBrains Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 XftAntialias=true
 XftHintStyle=hintslight
 XftSubPixel=rgb
 
 [Icons]
-Theme=breeze
+Theme=WhiteSur
 
 [KDE]
-LookAndFeelPackage=org.zero.newsprint
+LookAndFeelPackage=org.zero.desktop
 SingleClick=false
-widgetStyle=Breeze
-AnimationDurationFactor=0.7
+widgetStyle=kvantum
+AnimationDurationFactor=0.8
 
 [WM]
-activeFont=Geist Pixel Square,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+activeFont=Inter,10,-1,5,600,0,0,0,0,0,0,0,0,0,0,1

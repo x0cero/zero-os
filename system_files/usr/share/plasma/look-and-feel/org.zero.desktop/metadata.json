@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [{"Name": "Zero OS"}],
+        "Id": "org.zero.desktop",
+        "License": "GPL-3.0",
+        "Name": "Zero",
+        "Description": "A menu bar along the top and a dock along the bottom."
+    },
+    "X-Plasma-APIVersion": "2"
+}

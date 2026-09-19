@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Paints the Zero OS pictures at build time: wallpaper, cursor, mark.
+"""Paints the Zero OS pictures at build time: the wallpaper and the mark.
 
-Everything is black ink on paper. There is no grey anywhere in these
-pictures; tone is made of dots. The PNGs are written by hand so the build
-needs nothing but Python.
+The PNGs are written by hand so the build needs nothing but Python.
 """
 import math
 import os
@@ -109,67 +107,53 @@ def mark(canvas, cx, cy, size, color, hole=PAPER):
     )
 
 
-def arrow(scale):
-    """The pointer: a chunky black arrow with a paper outline."""
-    size = int(32 * scale)
-    canvas = Canvas(size, size, CLEAR)
-    s = scale * 32 / 34
-    points = [(4, 3), (4, 27), (10, 21), (15, 32), (20, 30), (15, 19), (24, 19)]
-    canvas.polygon([(x * s, y * s) for x, y in points], INK)
-    canvas.outline(max(2, int(2 * scale)), PAPER)
-    return canvas, int(4 * s), int(3 * s)
+def lerp(a, b, t):
+    return tuple(int(round(a[i] + (b[i] - a[i]) * t)) for i in range(4))
 
 
-def ibeam(scale):
-    size = int(32 * scale)
-    canvas = Canvas(size, size, CLEAR)
-    s = scale
-    w = max(2, int(3 * s))
-    canvas.fill(int(16 * s - w / 2), int(4 * s), w, int(24 * s), INK)
-    canvas.fill(int(10 * s), int(4 * s), int(12 * s), w, INK)
-    canvas.fill(int(10 * s), int(28 * s - w), int(12 * s), w, INK)
-    canvas.outline(max(2, int(2 * scale)), PAPER)
-    return canvas, int(16 * s), int(16 * s)
-
-
-def hand(scale):
-    """A pointing hand for links: drawn as an arrow with a ring, so it stays
-    one stroke language with the rest."""
-    canvas, x, y = arrow(scale)
-    return canvas, x, y
+def smooth(t):
+    return t * t * (3 - 2 * t)
 
 
 def wallpaper(path, width, height):
-    canvas = Canvas(width, height, PAPER)
-    # A faint grain of dots across the paper, sparse enough to read as
-    # texture from a distance and as ink up close.
-    for y in range(0, height, 8):
-        for x in range(0, width, 8):
-            if ((x // 8) * 7 + (y // 8) * 13) % 5 == 0:
-                canvas.put(x + (y // 8) % 3, y, INK)
-    mark(canvas, width - int(height * 0.16), height - int(height * 0.16), int(height * 0.14), INK)
+    """A wide, soft sweep of colour: warm light in the top left falling
+    into a deep blue in the bottom right, with a lift of rose across the
+    middle. No mark, no text; the desktop is not a billboard."""
+    warm = (0xF3, 0xEC, 0xE2, 255)
+    rose = (0xD9, 0xA8, 0xB4, 255)
+    blue = (0x2E, 0x3F, 0x6E, 255)
+    night = (0x14, 0x1B, 0x33, 255)
+    canvas = Canvas(width, height, night)
+    rows = []
+    for y in range(height):
+        row = bytearray()
+        for x in range(width):
+            t = (x / width * 0.55 + y / height * 0.45)
+            # A gentle wave so the bands are not dead straight.
+            t += 0.06 * math.sin(y / height * 4.2 + x / width * 2.1)
+            t = min(1.0, max(0.0, t))
+            if t < 0.35:
+                c = lerp(warm, rose, smooth(t / 0.35))
+            elif t < 0.72:
+                c = lerp(rose, blue, smooth((t - 0.35) / 0.37))
+            else:
+                c = lerp(blue, night, smooth((t - 0.72) / 0.28))
+            row += bytes(c)
+        rows.append(bytes(row))
+    canvas.pixels = bytearray(b"".join(rows))
     canvas.write(path)
 
 
 def main(out):
-    wallpaper(os.path.join(out, "wallpaper", "zero-paper.png"), 2560, 1600)
+    wallpaper(os.path.join(out, "wallpaper", "zero.png"), 2560, 1600)
 
-    icon = Canvas(256, 256, CLEAR)
-    mark(icon, 128, 128, 200, INK, CLEAR)
-    icon.write(os.path.join(out, "mark", "zero-mark-256.png"))
-    small = Canvas(64, 64, CLEAR)
-    mark(small, 32, 32, 52, INK, CLEAR)
-    small.write(os.path.join(out, "mark", "zero-mark-64.png"))
-
-    for name, draw in (("left_ptr", arrow), ("xterm", ibeam), ("hand2", hand)):
-        lines = []
-        for scale in (1, 1.5, 2, 3):
-            canvas, hx, hy = draw(scale)
-            file = f"{name}-{scale}.png"
-            canvas.write(os.path.join(out, "cursor", file))
-            lines.append(f"{int(24 * scale)} {hx} {hy} {file}")
-        with open(os.path.join(out, "cursor", f"{name}.cursor"), "w") as f:
-            f.write("\n".join(lines) + "\n")
+    for size in (16, 22, 24, 32, 48, 64, 128, 256):
+        icon = Canvas(size, size, CLEAR)
+        mark(icon, size / 2, size / 2, size * 0.78, INK, CLEAR)
+        icon.write(os.path.join(out, "mark", f"zero-mark-{size}.png"))
+        light = Canvas(size, size, CLEAR)
+        mark(light, size / 2, size / 2, size * 0.78, PAPER, CLEAR)
+        light.write(os.path.join(out, "mark", f"zero-mark-light-{size}.png"))
 
 
 if __name__ == "__main__":
