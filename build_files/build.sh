@@ -8,8 +8,8 @@ cp -avf "/ctx/system_files"/. /
 ### Packages
 # Kvantum draws the widgets; Inter and JetBrains Mono are the system fonts;
 # the app menu applet puts the focused program's menus in the top bar.
-dnf5 install -y kvantum rsms-inter-fonts jetbrains-mono-fonts plasma-workspace-appmenu 2>/dev/null \
-    || dnf5 install -y kvantum rsms-inter-fonts jetbrains-mono-fonts
+dnf5 install -y kvantum rsms-inter-fonts jetbrains-mono-fonts chromium
+dnf5 list --installed | grep -iE "appmenu|kvantum" || true
 
 ### The look: the WhiteSur family (GPL-3.0), installed system-wide.
 # Window decoration, Plasma theme, colour scheme and Kvantum theme.
@@ -39,8 +39,11 @@ done
 install -Dm644 "$PAINT/mark/zero-mark-256.png" /usr/share/pixmaps/zero-os.png
 rm -rf "$PAINT"
 
-### No first-run wizard: the installer already made the account.
+### No first-run wizard (the installer made the account) and no Aurora
+### welcome window; Zero OS gets its own welcome later.
 systemctl mask plasma-setup.service || true
+rm -f /etc/xdg/autostart/org.kde.plasma-welcome.desktop /etc/xdg/autostart/*welcome*.desktop
+ls /etc/xdg/autostart/ || true
 
 fc-cache -f
 gtk-update-icon-cache -f /usr/share/icons/hicolor || true

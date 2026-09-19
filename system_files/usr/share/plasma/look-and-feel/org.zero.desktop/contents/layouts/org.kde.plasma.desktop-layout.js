@@ -69,7 +69,7 @@ var layout = {
                             "showOnlyCurrentScreen": "false",
                             "groupingStrategy": "0",
                             "iconSpacing": "1",
-                            "launchers": "applications:org.kde.dolphin.desktop,applications:chromium-browser.desktop,applications:org.kde.konsole.desktop,applications:systemsettings.desktop"
+                            "launchers": "applications:org.kde.dolphin.desktop,applications:chromium-browser.desktop,applications:chromium.desktop,applications:org.kde.konsole.desktop,applications:systemsettings.desktop"
                         }
                     },
                     "plugin": "org.kde.plasma.icontasks"
