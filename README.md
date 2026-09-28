@@ -1,5 +1,7 @@
 # Zero OS
 
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/KMWnFJ5tre)
+
 A desktop Linux with its own look, built the way Bazzite and Bluefin are
 built: a Fedora Atomic image on top of Universal Blue's Aurora (KDE Plasma),
 assembled by GitHub from this repository, signed, and delivered as an
